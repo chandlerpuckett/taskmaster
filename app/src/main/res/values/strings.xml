@@ -41,4 +41,7 @@
     <string name="user_settings">User Settings</string>
     <string name="username">Username</string>
     <string name="save">save</string>
+    <string name="laundry">Do Laundry</string>
+    <string name="homework">Do Homework</string>
+    <string name="groceries">Go Grocery Shopping</string>
 </resources>

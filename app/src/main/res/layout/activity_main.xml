@@ -23,7 +23,8 @@
         android:layout_width="103dp"
         android:layout_height="43dp"
         android:layout_marginBottom="36dp"
-        android:text="@string/my_tasks2"
+        android:text="@string/my_tasks"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView" />

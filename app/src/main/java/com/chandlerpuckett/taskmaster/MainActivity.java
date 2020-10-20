@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.settingsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettingPage();
+            }
+        });
+
     }
 
     public void openAddTaskPage(){
@@ -44,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAllTasksPage(){
         Intent intent = new Intent(this, AllTasks.class);
+        startActivity(intent);
+    }
+
+    public void openSettingPage(){
+        Intent intent = new Intent(this,SettingsActivity.class);
         startActivity(intent);
     }
 

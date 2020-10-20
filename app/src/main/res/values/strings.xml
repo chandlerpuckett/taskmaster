@@ -4,6 +4,7 @@
     <string name="all_tasks">All Tasks</string>
     <string name="placeholder_image">placeholder image</string>
     <string name="add_task">Add Task</string>
+    <string name="total_tasks">Total Tasks : 0</string>
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
 </resources>

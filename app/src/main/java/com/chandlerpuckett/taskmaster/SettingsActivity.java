@@ -18,7 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor prefEdit = preferences.edit();
 
-        findViewById(R.id.saveUserBtn).setOnClickListener((view) ->{
+        findViewById(R.id.saveUserBtn).setOnClickListener((view) -> {
             EditText user = findViewById(R.id.enterUsername);
             prefEdit.putString("username", user.getText().toString());
             prefEdit.apply();

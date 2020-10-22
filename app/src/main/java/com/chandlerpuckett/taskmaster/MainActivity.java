@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+//        ---- task & settings buttons ----
         addTaskButton = (Button) findViewById(R.id.addTask);
         addTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -56,6 +59,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+//        ---- open Task Details page from hardcoded buttons ----
+        findViewById(R.id.doLaundry).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTaskDetailPage();
+            }
+        });
+
+        findViewById(R.id.homework).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTaskDetailPage();
+            }
+        });
+
+        findViewById(R.id.groceries).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTaskDetailPage();
+            }
+        });
+
     }
 
     public void openAddTaskPage(){
@@ -70,6 +96,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSettingPage(){
         Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openTaskDetailPage(){
+        Intent intent = new Intent(this, TaskDetail.class);
         startActivity(intent);
     }
 

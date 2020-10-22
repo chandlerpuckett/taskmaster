@@ -126,5 +126,28 @@
         app:layout_constraintStart_toStartOf="@+id/checkBox6"
         app:layout_constraintTop_toTopOf="@+id/doLaundry" />
 
+    <TextView
+        android:id="@+id/userDisplay"
+        android:layout_width="200dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="64dp"
+        android:fontFamily="sans-serif-black"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/doLaundry"
+        app:layout_constraintEnd_toEndOf="@+id/doLaundry"
+        app:layout_constraintStart_toStartOf="@+id/doLaundry" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="62dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="tasks"
+        app:layout_constraintBottom_toTopOf="@+id/doLaundry"
+        app:layout_constraintStart_toStartOf="@+id/userDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/userDisplay"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

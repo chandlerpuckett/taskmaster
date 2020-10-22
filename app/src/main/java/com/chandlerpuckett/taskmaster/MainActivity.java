@@ -1,18 +1,29 @@
 package com.chandlerpuckett.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private Button addTaskButton;
     private Button allTasksButton;
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        TextView userDisplay = findViewById(R.id.userDisplay);
+        userDisplay.setText(preferences.getString("username", "Enter a username"));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

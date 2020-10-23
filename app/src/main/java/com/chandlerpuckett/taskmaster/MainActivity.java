@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TaskViewAdapter.OnInteractWithTaskListener {
     private Button addTaskButton;
     private Button allTasksButton;
 
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         userDisplay.setText(user);
 
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +66,19 @@ public class MainActivity extends AppCompatActivity {
 //        ---------- RECYCLER VIEW --------------
 
         ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("Do Laundry","clean it", "in progress"));
+        tasks.add(new Task("Do Laundry","clean it", "new"));
         tasks.add(new Task("Do Homework","study math", "in progress"));
-        tasks.add(new Task("Grocery Shopping ","go to PCC for veggies", "in progress"));
+        tasks.add(new Task("Grocery Shopping","go to PCC", "assigned"));
+        tasks.add(new Task("Code Challenge","fix them all", "new"));
+        tasks.add(new Task("Clean Room","tidy up", "new"));
+        tasks.add(new Task("Wash Car","its dirty", "assigned"));
+        tasks.add(new Task("Walk Dog","pupper happy", "complete"));
+        tasks.add(new Task("Clean Kitchen","stanky dishes", "in progress"));
+
 
         RecyclerView recView = findViewById(R.id.homeRecyclerView);
         recView.setLayoutManager(new LinearLayoutManager(this));
-        recView.setAdapter(new TaskViewAdapter());
+        recView.setAdapter(new TaskViewAdapter(tasks, this));
 
 
 //        ---- open Task Details page from hardcoded buttons ----
@@ -131,4 +136,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void taskListener(Task task) {
+        Intent intent = new Intent(MainActivity.this, TaskDetail.class);
+        intent.putExtra("title", task.title);
+        intent.putExtra("state", task.state);
+        intent.putExtra("body", task.body);
+        startActivity(intent);
+    }
 }

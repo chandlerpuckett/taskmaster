@@ -62,23 +62,27 @@ public class MainActivity extends AppCompatActivity {
 
 //        ---- open Task Details page from hardcoded buttons ----
         findViewById(R.id.doLaundry).setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                openTaskDetailPage();
+                openTaskDetailPage(view);
             }
         });
 
         findViewById(R.id.homework).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                openTaskDetailPage();
+                openTaskDetailPage(view);
             }
         });
 
         findViewById(R.id.groceries).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                openTaskDetailPage();
+                openTaskDetailPage(view);
             }
         });
 
@@ -99,8 +103,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openTaskDetailPage(){
+    public void openTaskDetailPage(View view){
         Intent intent = new Intent(this, TaskDetail.class);
+        Button task = (Button) view;
+        String btnTxt = task.getText().toString();
+
+        System.out.println("---- TESTING TESTING ----");
+        System.out.println(btnTxt);
+
+        intent.putExtra("task",btnTxt);
         startActivity(intent);
     }
 

@@ -25,9 +25,10 @@ This app will allow a user to create and track tasks
 ### Day 3 - Recycler Views
 - Create Task Class
 - Refactor homepage to use a `RecyclerView` for displaying task data
-- [] replace homepage screenshot
-- [] implement `ViewAdapter` 
-- [] `RecyclerView` displays and is tappable
+- [x] replace homepage screenshot
+- [x] implement `ViewAdapter` 
+- [x] `RecyclerView` displays and is tappable
+- [x] homepage `RecyclerView` is clickable and sends user to Details page
 
 ### Screenshots
 #### Day2 Build

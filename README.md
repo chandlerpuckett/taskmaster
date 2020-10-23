@@ -17,13 +17,18 @@ This app will allow a user to create and track tasks
 ### Day 2 - Settings Page, Detail Page
 - Added a settings button to home page that takes user to their settings page
 - Settings page allows user to create / save a username
+- Username is persistent across all pages
 - Created Task detail page
 - Homepage has 3 buttons hardcoded w/ a task
+- Buttons on homepage navigates to "Task Detail" page with title of task
 
 
 ### Screenshots
 #### Day1 Build
-![home](screenshots/main-page.png)
-![add](screenshots/addtask.png)
-![all](screenshots/all-tasks.png)
+<img src="screenshots/main-page.png" alt="home" width="300">
+<img src="screenshots/username.png" alt="username" width="300">
+<img src="screenshots/taskDetail.png" alt="detail" width="300">
+<img src="screenshots/addtask.png" alt="add" width="300">
+<img src="screenshots/all-tasks.png" alt="alltasks" width="300">
+
 

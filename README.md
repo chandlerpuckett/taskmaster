@@ -31,7 +31,7 @@ This app will allow a user to create and track tasks
 - [x] homepage `RecyclerView` is clickable and sends user to Details page
 
 ### Screenshots
-#### Day2 Build
+#### Day3 Build
 <img src="screenshots/main-page.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/taskDetail.png" alt="detail" width="300">

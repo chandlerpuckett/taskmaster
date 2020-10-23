@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn-addTask"
+        android:id="@+id/btn_addTask"
         android:layout_width="122dp"
         android:layout_height="44dp"
         android:layout_marginStart="22dp"
@@ -54,7 +54,7 @@
         android:layout_marginTop="136dp"
         android:text="@string/total_tasks"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn-addTask" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_addTask" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"

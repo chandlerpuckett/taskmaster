@@ -22,6 +22,12 @@ This app will allow a user to create and track tasks
 - Homepage has 3 buttons hardcoded w/ a task
 - Buttons on homepage navigates to "Task Detail" page with title of task
 
+### Day 3 - Recycler Views
+- Create Task Class
+- Refactor homepage to use a `RecyclerView` for displaying task data
+- [] replace homepage screenshot
+- [] implement `ViewAdapter` 
+- [] `RecyclerView` displays and is tappable
 
 ### Screenshots
 #### Day2 Build

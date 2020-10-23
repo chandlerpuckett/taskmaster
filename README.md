@@ -24,7 +24,7 @@ This app will allow a user to create and track tasks
 
 
 ### Screenshots
-#### Day1 Build
+#### Day2 Build
 <img src="screenshots/main-page.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/taskDetail.png" alt="detail" width="300">

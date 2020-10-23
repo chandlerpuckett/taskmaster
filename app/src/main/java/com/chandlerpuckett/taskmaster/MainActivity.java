@@ -2,6 +2,8 @@ package com.chandlerpuckett.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -13,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private Button addTaskButton;
@@ -60,31 +64,43 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+//        ---------- RECYCLER VIEW --------------
+
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("Do Laundry","clean it", "in progress"));
+        tasks.add(new Task("Do Homework","study math", "in progress"));
+        tasks.add(new Task("Grocery Shopping ","go to PCC for veggies", "in progress"));
+
+        RecyclerView recView = findViewById(R.id.homeRecyclerView);
+        recView.setLayoutManager(new LinearLayoutManager(this));
+        recView.setAdapter(new TaskViewAdapter());
+
+
 //        ---- open Task Details page from hardcoded buttons ----
-        findViewById(R.id.doLaundry).setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View view) {
-                openTaskDetailPage(view);
-            }
-        });
-
-        findViewById(R.id.homework).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                openTaskDetailPage(view);
-            }
-        });
-
-        findViewById(R.id.groceries).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                openTaskDetailPage(view);
-            }
-        });
+//        findViewById(R.id.doLaundry).setOnClickListener(new View.OnClickListener() {
+//
+//
+//            @Override
+//            public void onClick(View view) {
+//                openTaskDetailPage(view);
+//            }
+//        });
+//
+//        findViewById(R.id.homework).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                openTaskDetailPage(view);
+//            }
+//        });
+//
+//        findViewById(R.id.groceries).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                openTaskDetailPage(view);
+//            }
+//        });
 
     }
 

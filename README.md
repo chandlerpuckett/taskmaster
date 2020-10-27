@@ -31,10 +31,10 @@ This app will allow a user to create and track tasks
 - [x] homepage `RecyclerView` is clickable and sends user to Details page
 
 ### Day 4 - Room
-- Set up Room, modify `Task` to entity
-- `AddTask` form saves to local database
-- home page RecyclerView pull from database
-- Pull task title & description to the detail page once clicked
+- [x] Set up Room, modify `Task` to entity
+- [x] `AddTask` form saves to local database
+- [x] home page RecyclerView pull from database
+- [x] Pull task title & description to the detail page once clicked
 
 
 ### Screenshots

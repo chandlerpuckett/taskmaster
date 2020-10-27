@@ -35,8 +35,9 @@
     <TextView
         android:id="@+id/taskDetailBody"
         android:layout_width="289dp"
-        android:layout_height="290dp"
+        android:layout_height="100dp"
         android:text="@string/lorem_ipsum"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,10 +48,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/task_description"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/taskDetailBody"
         app:layout_constraintStart_toStartOf="@+id/taskDetailBody"
         app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/task_state"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailState"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailState" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:text="@string/description"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailBody"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailBody" />
 </androidx.constraintlayout.widget.ConstraintLayout>

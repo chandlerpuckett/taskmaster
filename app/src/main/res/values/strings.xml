@@ -44,4 +44,6 @@
     <string name="laundry">Do Laundry</string>
     <string name="homework">Do Homework</string>
     <string name="groceries">Go Grocery Shopping</string>
+    <string name="task_state">Task State:</string>
+    <string name="description">Description:</string>
 </resources>

@@ -30,7 +30,7 @@ This app will allow a user to create and track tasks
 - [x] `RecyclerView` displays and is tappable
 - [x] homepage `RecyclerView` is clickable and sends user to Details page
 
-### Day 4 - Room
+### Day 4 - Room / Local Storage
 - [x] Set up Room, modify `Task` to entity
 - [x] `AddTask` form saves to local database
 - [x] home page RecyclerView pull from database
@@ -38,10 +38,10 @@ This app will allow a user to create and track tasks
 
 
 ### Screenshots
-#### Day3 Build
+#### Day4 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
-<img src="screenshots/taskDetail.png" alt="detail" width="300">
+<img src="screenshots/task-detail2.png" alt="detail" width="300">
 <img src="screenshots/addtask.png" alt="add" width="300">
 <img src="screenshots/all-tasks.png" alt="alltasks" width="300">
 

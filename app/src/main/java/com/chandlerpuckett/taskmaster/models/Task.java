@@ -1,7 +1,5 @@
-package com.chandlerpuckett.taskmaster;
+package com.chandlerpuckett.taskmaster.models;
 
-import androidx.constraintlayout.solver.state.State;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,7 +9,7 @@ public class Task {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
-    String title, body, state;
+    public String title, body, state;
 
     public Task(String title, String body, String state) {
         this.title = title;

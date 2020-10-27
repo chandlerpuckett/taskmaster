@@ -1,26 +1,30 @@
 package com.chandlerpuckett.taskmaster;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import com.chandlerpuckett.taskmaster.models.Database;
+import com.chandlerpuckett.taskmaster.models.Task;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.OnInteractWithTaskListener {
     private Button addTaskButton;
     private Button allTasksButton;
+
+    Database database;
 
     @Override
     public void onResume(){
@@ -30,12 +34,27 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         String user = String.format("%s's tasks", pref.getString("username", "Enter a username"));
         userDisplay.setText(user);
 
+
+        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
+                .allowMainThreadQueries()
+                .build();
+
+//        ---------- RECYCLER VIEW --------------
+
+        ArrayList<Task> tasks = (ArrayList<Task>) database.taskDao().getAllTasksReversed();
+
+        RecyclerView recView = findViewById(R.id.homeRecyclerView);
+        recView.setLayoutManager(new LinearLayoutManager(this));
+        recView.setAdapter(new TaskViewAdapter(tasks, this));
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
 //        ---- task & settings buttons ----
@@ -61,52 +80,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
                 openSettingPage();
             }
         });
-
-
-//        ---------- RECYCLER VIEW --------------
-
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("Do Laundry","clean it", "new"));
-        tasks.add(new Task("Do Homework","study math", "in progress"));
-        tasks.add(new Task("Grocery Shopping","go to PCC", "assigned"));
-        tasks.add(new Task("Code Challenge","fix them all", "new"));
-        tasks.add(new Task("Clean Room","tidy up", "new"));
-        tasks.add(new Task("Wash Car","its dirty", "assigned"));
-        tasks.add(new Task("Walk Dog","pupper happy", "complete"));
-        tasks.add(new Task("Clean Kitchen","stanky dishes", "in progress"));
-
-
-        RecyclerView recView = findViewById(R.id.homeRecyclerView);
-        recView.setLayoutManager(new LinearLayoutManager(this));
-        recView.setAdapter(new TaskViewAdapter(tasks, this));
-
-
-//        ---- open Task Details page from hardcoded buttons ----
-//        findViewById(R.id.doLaundry).setOnClickListener(new View.OnClickListener() {
-//
-//
-//            @Override
-//            public void onClick(View view) {
-//                openTaskDetailPage(view);
-//            }
-//        });
-//
-//        findViewById(R.id.homework).setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                openTaskDetailPage(view);
-//            }
-//        });
-//
-//        findViewById(R.id.groceries).setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                openTaskDetailPage(view);
-//            }
-//        });
-
     }
 
     public void openAddTaskPage(){

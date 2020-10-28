@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.chandlerpuckett.taskmaster.models.Database;
 import com.chandlerpuckett.taskmaster.models.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,9 +29,22 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        final Snackbar snackbar = Snackbar
-                .make(findViewById(R.id.myCoordinatorLayout), R.string.success,
-                Snackbar.LENGTH_SHORT);
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+            TaskItem task = TaskItem.builder()
+                    .title("Grocery's").body("go to QFC").state("new")
+                    .build();
+
+            Amplify.API.mutate(ModelMutation.create(task),
+                    response -> Log.i("Amplify", "successfully added"),
+                    error -> Log.e("Amplify", error.toString()));
+
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
+
 
         database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
                 .allowMainThreadQueries()

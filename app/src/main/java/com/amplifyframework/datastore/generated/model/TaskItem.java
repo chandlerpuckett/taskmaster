@@ -1,14 +1,11 @@
 package com.amplifyframework.datastore.generated.model;
 
 
-import java.util.List;
 import java.util.UUID;
-import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.Model;
-import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
@@ -18,7 +15,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 /** This is an auto generated class representing the Task type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Tasks")
-public final class Task implements Model {
+public final class TaskItem implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField TITLE = field("title");
   public static final QueryField BODY = field("body");
@@ -43,7 +40,7 @@ public final class Task implements Model {
       return state;
   }
   
-  private Task(String id, String title, String body, String state) {
+  private TaskItem(String id, String title, String body, String state) {
     this.id = id;
     this.title = title;
     this.body = body;
@@ -57,7 +54,7 @@ public final class Task implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Task task = (Task) obj;
+      TaskItem task = (TaskItem) obj;
       return ObjectsCompat.equals(getId(), task.getId()) &&
               ObjectsCompat.equals(getTitle(), task.getTitle()) &&
               ObjectsCompat.equals(getBody(), task.getBody()) &&
@@ -101,7 +98,7 @@ public final class Task implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Task justId(String id) {
+  public static TaskItem justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -111,7 +108,7 @@ public final class Task implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Task(
+    return new TaskItem(
       id,
       null,
       null,
@@ -126,7 +123,7 @@ public final class Task implements Model {
       state);
   }
   public interface BuildStep {
-    Task build();
+    TaskItem build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep title(String title);
     BuildStep body(String body);
@@ -140,10 +137,10 @@ public final class Task implements Model {
     private String body;
     private String state;
     @Override
-     public Task build() {
+     public TaskItem build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Task(
+        return new TaskItem(
           id,
           title,
           body,

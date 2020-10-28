@@ -15,6 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.chandlerpuckett.taskmaster.models.Database;
 import com.chandlerpuckett.taskmaster.models.Task;
 
@@ -33,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         TextView userDisplay = findViewById(R.id.usernameDisplay);
         String user = String.format("%s's tasks", pref.getString("username", "Enter a username"));
         userDisplay.setText(user);
-
 
         database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
                 .allowMainThreadQueries()

@@ -47,9 +47,14 @@ This app will allow a user to create and track tasks
     3. `SaveTaskTest` tests for ability to save task to local storage & display in recycler view
     4. `TaskDetailTest` test task detail view
 
+### Day 6 - Connected Amplify / Dynamo DB
+- added AWS Amplify functionality
+- addTask saves to cloud -> dynamo db
+- homepage recycler view populates from cloud -> dynamo db
+
 
 ### Screenshots
-#### Day5 Build
+#### Day6 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/task-detail2.png" alt="detail" width="300">

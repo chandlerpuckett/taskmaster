@@ -8,22 +8,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.chandlerpuckett.taskmaster.models.Task;
 
 import java.util.ArrayList;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskViewHolder> {
 
-    public ArrayList<Task> tasks;
+    public ArrayList<TaskItem> tasks;
     public OnInteractWithTaskListener listener;
 
-    public TaskViewAdapter(ArrayList<Task> tasks, OnInteractWithTaskListener listener) {
+    public TaskViewAdapter(ArrayList<TaskItem> tasks, OnInteractWithTaskListener listener) {
         this.tasks = tasks;
         this.listener = listener;
     }
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
-        public Task task;
+        public TaskItem task;
         public View itemView;
 
 
@@ -49,7 +50,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskVi
             @Override
             public void onClick(View view) {
 
-                System.out.println(taskViewHolder.task.title);
+                System.out.println(taskViewHolder.task.getTitle());
                 listener.taskListener(taskViewHolder.task);
 
             }
@@ -60,7 +61,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskVi
 
 //    ----- custom interface -----
     public static interface OnInteractWithTaskListener {
-        public void taskListener(Task task);
+        public void taskListener(TaskItem task);
     }
 
     @Override
@@ -71,9 +72,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskVi
         TextView bodyTextView = holder.itemView.findViewById(R.id.recBody);
         TextView stateTextView = holder.itemView.findViewById(R.id.recState);
 
-        titleTextView.setText(holder.task.title);
-        bodyTextView.setText(holder.task.body);
-        stateTextView.setText(holder.task.state);
+        titleTextView.setText(holder.task.getTitle());
+        bodyTextView.setText(holder.task.getBody());
+        stateTextView.setText(holder.task.getState());
     }
 
     @Override

@@ -16,7 +16,7 @@
                 "description": null,
                 "fields": [
                     {
-                        "name": "getTask",
+                        "name": "getTaskItem",
                         "description": null,
                         "args": [
                             {
@@ -36,14 +36,14 @@
                         ],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
                     },
                     {
-                        "name": "listTasks",
+                        "name": "listTaskItems",
                         "description": null,
                         "args": [
                             {
@@ -51,7 +51,7 @@
                                 "description": null,
                                 "type": {
                                     "kind": "INPUT_OBJECT",
-                                    "name": "ModelTaskFilterInput",
+                                    "name": "ModelTaskItemFilterInput",
                                     "ofType": null
                                 },
                                 "defaultValue": null
@@ -79,7 +79,7 @@
                         ],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "ModelTaskConnection",
+                            "name": "ModelTaskItemConnection",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -103,7 +103,7 @@
             },
             {
                 "kind": "OBJECT",
-                "name": "Task",
+                "name": "TaskItem",
                 "description": null,
                 "fields": [
                     {
@@ -218,7 +218,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "ModelTaskFilterInput",
+                "name": "ModelTaskItemFilterInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -270,7 +270,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelTaskFilterInput",
+                                "name": "ModelTaskItemFilterInput",
                                 "ofType": null
                             }
                         },
@@ -284,7 +284,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelTaskFilterInput",
+                                "name": "ModelTaskItemFilterInput",
                                 "ofType": null
                             }
                         },
@@ -295,7 +295,7 @@
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
-                            "name": "ModelTaskFilterInput",
+                            "name": "ModelTaskItemFilterInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -773,7 +773,7 @@
             },
             {
                 "kind": "OBJECT",
-                "name": "ModelTaskConnection",
+                "name": "ModelTaskItemConnection",
                 "description": null,
                 "fields": [
                     {
@@ -785,7 +785,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "OBJECT",
-                                "name": "Task",
+                                "name": "TaskItem",
                                 "ofType": null
                             }
                         },
@@ -816,7 +816,7 @@
                 "description": null,
                 "fields": [
                     {
-                        "name": "createTask",
+                        "name": "createTaskItem",
                         "description": null,
                         "args": [
                             {
@@ -827,7 +827,7 @@
                                     "name": null,
                                     "ofType": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "CreateTaskInput",
+                                        "name": "CreateTaskItemInput",
                                         "ofType": null
                                     }
                                 },
@@ -838,7 +838,7 @@
                                 "description": null,
                                 "type": {
                                     "kind": "INPUT_OBJECT",
-                                    "name": "ModelTaskConditionInput",
+                                    "name": "ModelTaskItemConditionInput",
                                     "ofType": null
                                 },
                                 "defaultValue": null
@@ -846,14 +846,14 @@
                         ],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
                     },
                     {
-                        "name": "updateTask",
+                        "name": "updateTaskItem",
                         "description": null,
                         "args": [
                             {
@@ -864,7 +864,7 @@
                                     "name": null,
                                     "ofType": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "UpdateTaskInput",
+                                        "name": "UpdateTaskItemInput",
                                         "ofType": null
                                     }
                                 },
@@ -875,7 +875,7 @@
                                 "description": null,
                                 "type": {
                                     "kind": "INPUT_OBJECT",
-                                    "name": "ModelTaskConditionInput",
+                                    "name": "ModelTaskItemConditionInput",
                                     "ofType": null
                                 },
                                 "defaultValue": null
@@ -883,14 +883,14 @@
                         ],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
                     },
                     {
-                        "name": "deleteTask",
+                        "name": "deleteTaskItem",
                         "description": null,
                         "args": [
                             {
@@ -901,7 +901,7 @@
                                     "name": null,
                                     "ofType": {
                                         "kind": "INPUT_OBJECT",
-                                        "name": "DeleteTaskInput",
+                                        "name": "DeleteTaskItemInput",
                                         "ofType": null
                                     }
                                 },
@@ -912,7 +912,7 @@
                                 "description": null,
                                 "type": {
                                     "kind": "INPUT_OBJECT",
-                                    "name": "ModelTaskConditionInput",
+                                    "name": "ModelTaskItemConditionInput",
                                     "ofType": null
                                 },
                                 "defaultValue": null
@@ -920,7 +920,7 @@
                         ],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -934,7 +934,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "CreateTaskInput",
+                "name": "CreateTaskItemInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -985,7 +985,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "ModelTaskConditionInput",
+                "name": "ModelTaskItemConditionInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -1027,7 +1027,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelTaskConditionInput",
+                                "name": "ModelTaskItemConditionInput",
                                 "ofType": null
                             }
                         },
@@ -1041,7 +1041,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "INPUT_OBJECT",
-                                "name": "ModelTaskConditionInput",
+                                "name": "ModelTaskItemConditionInput",
                                 "ofType": null
                             }
                         },
@@ -1052,7 +1052,7 @@
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
-                            "name": "ModelTaskConditionInput",
+                            "name": "ModelTaskItemConditionInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -1064,7 +1064,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "UpdateTaskInput",
+                "name": "UpdateTaskItemInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -1119,7 +1119,7 @@
             },
             {
                 "kind": "INPUT_OBJECT",
-                "name": "DeleteTaskInput",
+                "name": "DeleteTaskItemInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -1144,36 +1144,36 @@
                 "description": null,
                 "fields": [
                     {
-                        "name": "onCreateTask",
+                        "name": "onCreateTaskItem",
                         "description": null,
                         "args": [],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
                     },
                     {
-                        "name": "onUpdateTask",
+                        "name": "onUpdateTaskItem",
                         "description": null,
                         "args": [],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
                     },
                     {
-                        "name": "onDeleteTask",
+                        "name": "onDeleteTaskItem",
                         "description": null,
                         "args": [],
                         "type": {
                             "kind": "OBJECT",
-                            "name": "Task",
+                            "name": "TaskItem",
                             "ofType": null
                         },
                         "isDeprecated": false,

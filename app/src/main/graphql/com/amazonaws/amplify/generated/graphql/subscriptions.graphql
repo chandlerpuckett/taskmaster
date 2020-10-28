@@ -1,6 +1,6 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTask {
-  onCreateTask {
+subscription OnCreateTaskItem {
+  onCreateTaskItem {
     id
     title
     body
@@ -9,8 +9,8 @@ subscription OnCreateTask {
     updatedAt
   }
 }
-subscription OnUpdateTask {
-  onUpdateTask {
+subscription OnUpdateTaskItem {
+  onUpdateTaskItem {
     id
     title
     body
@@ -19,8 +19,8 @@ subscription OnUpdateTask {
     updatedAt
   }
 }
-subscription OnDeleteTask {
-  onDeleteTask {
+subscription OnDeleteTaskItem {
+  onDeleteTaskItem {
     id
     title
     body

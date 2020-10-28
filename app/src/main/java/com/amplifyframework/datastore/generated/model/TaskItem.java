@@ -40,7 +40,7 @@ public final class TaskItem implements Model {
       return state;
   }
   
-  private TaskItem(String id, String title, String body, String state) {
+  public TaskItem(String id, String title, String body, String state) {
     this.id = id;
     this.title = title;
     this.body = body;

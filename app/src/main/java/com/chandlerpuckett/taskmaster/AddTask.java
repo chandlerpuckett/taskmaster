@@ -29,52 +29,54 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
+        configureAws();
 
-            TaskItem task = TaskItem.builder()
-                    .title("Grocery's").body("go to QFC").state("new")
-                    .build();
-
-            Amplify.API.mutate(ModelMutation.create(task),
-                    response -> Log.i("Amplify", "successfully added"),
-                    error -> Log.e("Amplify", error.toString()));
-
-        } catch (AmplifyException e) {
-            e.printStackTrace();
-        }
-
-
-        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
-                .allowMainThreadQueries()
-                .build();
+//        ----- old DB config -----
+//        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
+//                .allowMainThreadQueries()
+//                .build();
 
         addTaskBtn = (Button) findViewById(R.id.btn_addTask);
         addTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                ---- save to DB ----
+//                ---- get text from inputs ----
                 EditText titleInput = AddTask.this.findViewById(R.id.titleInput);
                 String titleIn = titleInput.getText().toString();
-
-                System.out.println(titleIn);
 
                 EditText bodyInput = AddTask.this.findViewById(R.id.bodyIn);
                 String bodyIn = bodyInput.getText().toString();
 
-                System.out.println(bodyIn);
+//                ----- create TaskItem, save to DynamoDB -----
+                TaskItem newTask = TaskItem.builder()
+                        .title(titleIn).body(bodyIn).state("new")
+                        .build();
 
-                Task task = new Task(titleIn, bodyIn, "new");
-                database.taskDao().saveTask(task);
+                Amplify.API.mutate(ModelMutation.create(newTask),
+                        response -> Log.i("Amplify", "---- successfully added to DYNAMO -------"),
+                        error -> Log.e("Amplify", error.toString()));
 
+
+//                ----- save to local DB -----
+//                Task task = new Task(titleIn, bodyIn, "new");
+//                database.taskDao().saveTask(task);
 
                 Toast toast = Toast.makeText(AddTask.this, "Task Saved!", Toast.LENGTH_LONG);
                 toast.show();
             }
         });
 
+    }
+
+    private void configureAws(){
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

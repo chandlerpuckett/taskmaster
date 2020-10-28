@@ -42,6 +42,17 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
                 .allowMainThreadQueries()
                 .build();
 
+
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
+
+
 //        ---------- RECYCLER VIEW --------------
 
         ArrayList<Task> tasks = (ArrayList<Task>) database.taskDao().getAllTasksReversed();

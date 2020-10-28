@@ -9,6 +9,10 @@ This app will allow a user to create and track tasks
 3. Run the app from a phone emulator (Pixel 2 or 3 preferred)
 4. Enjoy!
 
+### Espresso Test Operation
+1. Run each test one at a time
+2. **WIPE APP MEMORY BETWEEN EVERY TEST**
+
 ### Day 1 - Initial build 
 - Added 3 activity pages: main, add task, and all tasks
 - linked buttons on main pages to navigate to other activity pages
@@ -36,9 +40,16 @@ This app will allow a user to create and track tasks
 - [x] home page RecyclerView pull from database
 - [x] Pull task title & description to the detail page once clicked
 
+### Day 5 - Espresso Tests
+- Added 4 Espresso Tests
+    1. `DisplayUsernameTest` ensures that a username can be saved & displayed on home page
+    2. `MainElementsExist` tests for UI elements
+    3. `SaveTaskTest` tests for ability to save task to local storage & display in recycler view
+    4. `TaskDetailTest` test task detail view
+
 
 ### Screenshots
-#### Day4 Build
+#### Day5 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/task-detail2.png" alt="detail" width="300">

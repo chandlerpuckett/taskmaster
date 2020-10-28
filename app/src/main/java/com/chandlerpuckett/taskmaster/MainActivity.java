@@ -1,5 +1,6 @@
 package com.chandlerpuckett.taskmaster;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -11,12 +12,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.chandlerpuckett.taskmaster.models.Database;
@@ -28,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
     private Button addTaskButton;
     private Button allTasksButton;
 
+    ArrayList<TaskItem> taskItems;
+    RecyclerView recyclerView;
+
     Database database;
 
     @Override
@@ -38,28 +47,35 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         String user = String.format("%s's tasks", pref.getString("username", "Enter a username"));
         userDisplay.setText(user);
 
-        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
-                .allowMainThreadQueries()
-                .build();
+        configureAws();
+
+        Handler handler = new Handler(Looper.getMainLooper(),
+                new Handler.Callback() {
+                    @Override
+                    public boolean handleMessage(@NonNull Message message) {
+                        recyclerView.getAdapter().notifyDataSetChanged();
+                        return false;
+                    }
+                });
+
+        connectToRecyclerView(handler);
 
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
 
+//        ------ OLD LOCAL DB RECYCLER VIEW ---------
 
-        } catch (AmplifyException e) {
-            e.printStackTrace();
-        }
+//        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
+//                .allowMainThreadQueries()
+//                .build();
 
 
 //        ---------- RECYCLER VIEW --------------
 
-        ArrayList<Task> tasks = (ArrayList<Task>) database.taskDao().getAllTasksReversed();
-
-        RecyclerView recView = findViewById(R.id.homeRecyclerView);
-        recView.setLayoutManager(new LinearLayoutManager(this));
-        recView.setAdapter(new TaskViewAdapter(tasks, this));
+//        ArrayList<Task> tasks = (ArrayList<Task>) database.taskDao().getAllTasksReversed();
+//
+//        RecyclerView recView = findViewById(R.id.homeRecyclerView);
+//        recView.setLayoutManager(new LinearLayoutManager(this));
+//        recView.setAdapter(new TaskViewAdapter(tasks, this));
 
     }
 
@@ -123,12 +139,42 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         startActivity(intent);
     }
 
+//    ----- AWS Helper Methods ------
+    private void configureAws(){
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(getApplicationContext());
+
+        } catch (AmplifyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void connectToRecyclerView(Handler handler){
+        taskItems = new ArrayList<>();
+        recyclerView = findViewById(R.id.homeRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new TaskViewAdapter(taskItems, this));
+
+        Amplify.API.query(
+                ModelQuery.list(TaskItem.class),
+                response -> {
+                    for (TaskItem task : response.getData()){
+                        taskItems.add(task);
+                    }
+                    handler.sendEmptyMessage(1);
+                    Log.i("Amplify query Items", "we pulled this many items from Dynamo " + taskItems.size());
+                },
+                error -> Log.i("Amplify.queryItems", "Did not get items"));
+
+    }
+
     @Override
-    public void taskListener(Task task) {
+    public void taskListener(TaskItem task) {
         Intent intent = new Intent(MainActivity.this, TaskDetail.class);
-        intent.putExtra("title", task.title);
-        intent.putExtra("state", task.state);
-        intent.putExtra("body", task.body);
+        intent.putExtra("title", task.getTitle());
+        intent.putExtra("state", task.getState());
+        intent.putExtra("body", task.getBody());
         startActivity(intent);
     }
 }

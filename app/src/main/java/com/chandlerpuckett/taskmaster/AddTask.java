@@ -80,7 +80,7 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
     }
 
     @Override
-    public void taskListener(Task task) {
+    public void taskListener(TaskItem task) {
 
     }
 }

@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         String user = String.format("%s's tasks", pref.getString("username", "Enter a username"));
         userDisplay.setText(user);
 
-        configureAws();
-
         Handler handler = new Handler(Looper.getMainLooper(),
                 new Handler.Callback() {
                     @Override
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        configureAws();
 
 
 //        ---- task & settings buttons ----

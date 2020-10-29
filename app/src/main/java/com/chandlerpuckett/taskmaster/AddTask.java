@@ -15,14 +15,14 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
-import com.chandlerpuckett.taskmaster.models.Database;
+
 import com.chandlerpuckett.taskmaster.models.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInteractWithTaskListener {
     private Button addTaskBtn;
 
-    Database database;
+//    Database database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

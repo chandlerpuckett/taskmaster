@@ -3,4 +3,13 @@ type TaskItem @model {
   title: String
   body: String
   state: String
+  foundAt: Team @connection(name: "taskItems")
 }
+
+type Team @model {
+  id: ID!
+  name: String
+  taskItems: [TaskItem] @connection(name: "taskItems")
+}
+
+

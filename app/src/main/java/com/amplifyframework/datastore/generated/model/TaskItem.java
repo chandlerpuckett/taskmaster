@@ -1,29 +1,35 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.BelongsTo;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
 import com.amplifyframework.core.model.Model;
+import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
 import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Task type in your schema. */
+/** This is an auto generated class representing the TaskItem type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Tasks")
+@ModelConfig(pluralName = "TaskItems")
 public final class TaskItem implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField TITLE = field("title");
   public static final QueryField BODY = field("body");
   public static final QueryField STATE = field("state");
+  public static final QueryField FOUND_AT = field("taskItemFoundAtId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="Team") @BelongsTo(targetName = "taskItemFoundAtId", type = Team.class) Team foundAt;
   public String getId() {
       return id;
   }
@@ -40,11 +46,16 @@ public final class TaskItem implements Model {
       return state;
   }
   
-  public TaskItem(String id, String title, String body, String state) {
+  public Team getFoundAt() {
+      return foundAt;
+  }
+  
+  private TaskItem(String id, String title, String body, String state, Team foundAt) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.foundAt = foundAt;
   }
   
   @Override
@@ -54,11 +65,12 @@ public final class TaskItem implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      TaskItem task = (TaskItem) obj;
-      return ObjectsCompat.equals(getId(), task.getId()) &&
-              ObjectsCompat.equals(getTitle(), task.getTitle()) &&
-              ObjectsCompat.equals(getBody(), task.getBody()) &&
-              ObjectsCompat.equals(getState(), task.getState());
+      TaskItem taskItem = (TaskItem) obj;
+      return ObjectsCompat.equals(getId(), taskItem.getId()) &&
+              ObjectsCompat.equals(getTitle(), taskItem.getTitle()) &&
+              ObjectsCompat.equals(getBody(), taskItem.getBody()) &&
+              ObjectsCompat.equals(getState(), taskItem.getState()) &&
+              ObjectsCompat.equals(getFoundAt(), taskItem.getFoundAt());
       }
   }
   
@@ -69,6 +81,7 @@ public final class TaskItem implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getFoundAt())
       .toString()
       .hashCode();
   }
@@ -76,11 +89,12 @@ public final class TaskItem implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Task {")
+      .append("TaskItem {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
-      .append("state=" + String.valueOf(getState()))
+      .append("state=" + String.valueOf(getState()) + ", ")
+      .append("foundAt=" + String.valueOf(getFoundAt()))
       .append("}")
       .toString();
   }
@@ -112,6 +126,7 @@ public final class TaskItem implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -120,7 +135,8 @@ public final class TaskItem implements Model {
     return new CopyOfBuilder(id,
       title,
       body,
-      state);
+      state,
+      foundAt);
   }
   public interface BuildStep {
     TaskItem build();
@@ -128,6 +144,7 @@ public final class TaskItem implements Model {
     BuildStep title(String title);
     BuildStep body(String body);
     BuildStep state(String state);
+    BuildStep foundAt(Team foundAt);
   }
   
 
@@ -136,6 +153,7 @@ public final class TaskItem implements Model {
     private String title;
     private String body;
     private String state;
+    private Team foundAt;
     @Override
      public TaskItem build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -144,7 +162,8 @@ public final class TaskItem implements Model {
           id,
           title,
           body,
-          state);
+          state,
+          foundAt);
     }
     
     @Override
@@ -162,6 +181,12 @@ public final class TaskItem implements Model {
     @Override
      public BuildStep state(String state) {
         this.state = state;
+        return this;
+    }
+    
+    @Override
+     public BuildStep foundAt(Team foundAt) {
+        this.foundAt = foundAt;
         return this;
     }
     
@@ -188,11 +213,12 @@ public final class TaskItem implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state) {
+    private CopyOfBuilder(String id, String title, String body, String state, Team foundAt) {
       super.id(id);
       super.title(title)
         .body(body)
-        .state(state);
+        .state(state)
+        .foundAt(foundAt);
     }
     
     @Override
@@ -208,6 +234,11 @@ public final class TaskItem implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder foundAt(Team foundAt) {
+      return (CopyOfBuilder) super.foundAt(foundAt);
     }
   }
   

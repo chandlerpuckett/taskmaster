@@ -52,9 +52,15 @@ This app will allow a user to create and track tasks
 - addTask saves to cloud -> dynamo db
 - homepage recycler view populates from cloud -> dynamo db
 
+### Day 7 - Related Data
+- Phasing out local database
+- Refactored DynamoDB Schema
+- Added radio buttons to add task to a "Team"
+- TODO: flesh out full radio button functionality
+- TODO: allow user to be added to a team
 
 ### Screenshots
-#### Day6 Build
+#### Day7 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/task-detail2.png" alt="detail" width="300">

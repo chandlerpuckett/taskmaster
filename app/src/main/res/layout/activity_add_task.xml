@@ -39,8 +39,8 @@
         android:id="@+id/btn_addTask"
         android:layout_width="122dp"
         android:layout_height="44dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="55dp"
         android:background="#00BCD4"
         android:text="@string/add_task"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,8 @@
         android:id="@+id/textView3"
         android:layout_width="110dp"
         android:layout_height="27dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
         android:text="@string/total_tasks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_addTask" />
@@ -90,6 +90,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/task_description" />
+
+        <RadioGroup
+            android:id="@+id/radioBtnGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/team1Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Team 1" />
+
+            <RadioButton
+                android:id="@+id/team2Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Team 2" />
+
+            <RadioButton
+                android:id="@+id/team3Btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Team 3" />
+        </RadioGroup>
+
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

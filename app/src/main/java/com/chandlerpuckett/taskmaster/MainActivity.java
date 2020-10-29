@@ -22,10 +22,11 @@ import android.widget.TextView;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
-import com.chandlerpuckett.taskmaster.models.Database;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.chandlerpuckett.taskmaster.models.Task;
 
 import java.util.ArrayList;
@@ -35,9 +36,10 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
     private Button allTasksButton;
 
     ArrayList<TaskItem> taskItems;
+    ArrayList<Team> teams;
     RecyclerView recyclerView;
 
-    Database database;
+//    Database database;
 
     @Override
     public void onResume(){
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         setContentView(R.layout.activity_main);
 
         configureAws();
+        teamCreation();
 
 
 //        ---- task & settings buttons ----
@@ -165,6 +168,32 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
                 },
                 error -> Log.i("Amplify.queryItems", "Did not get items"));
 
+    }
+
+    private void teamCreation(){
+        Team team1 = Team.builder()
+                .name("Team1")
+                .build();
+
+        Team team2 = Team.builder()
+                .name("Team2")
+                .build();
+
+        Team team3 = Team.builder()
+                .name("Team3")
+                .build();
+
+        Amplify.API.mutate(ModelMutation.create(team1),
+                response -> Log.i("Amplify", "---- Added team1 ----"),
+                error -> Log.e("Amplify","---- failed to add team1 ----"));
+
+        Amplify.API.mutate(ModelMutation.create(team2),
+                response -> Log.i("Amplify", "----- added team2 -----"),
+                error -> Log.e("amplify", "---- failed to add team2 ----"));
+
+        Amplify.API.mutate(ModelMutation.create(team3),
+                response -> Log.i("Amplify", "----- added team3 -----"),
+                error -> Log.e("amplify", "---- failed to add team3 ----"));
     }
 
     @Override

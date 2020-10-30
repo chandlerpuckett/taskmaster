@@ -101,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="0"
                 android:text="Team 1" />
 
             <RadioButton
@@ -108,6 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="1"
                 android:text="Team 2" />
 
             <RadioButton
@@ -115,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:contentDescription="2"
                 android:text="Team 3" />
         </RadioGroup>
 

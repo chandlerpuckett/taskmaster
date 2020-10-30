@@ -25,6 +25,9 @@ public final class Team implements Model {
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
   private final @ModelField(targetType="TaskItem") @HasMany(associatedWith = "foundAt", type = TaskItem.class) List<TaskItem> taskItems = null;
+
+
+
   public String getId() {
       return id;
   }
@@ -37,7 +40,7 @@ public final class Team implements Model {
       return taskItems;
   }
   
-  private Team(String id, String name) {
+  public Team(String id, String name) {
     this.id = id;
     this.name = name;
   }

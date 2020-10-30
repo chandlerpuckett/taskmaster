@@ -82,6 +82,4 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskVi
         return tasks.size();      // make this return the list length
     }
 
-
-
 }

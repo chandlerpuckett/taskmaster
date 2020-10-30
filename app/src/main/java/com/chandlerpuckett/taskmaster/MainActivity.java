@@ -85,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         setContentView(R.layout.activity_main);
 
         configureAws();
-        teamCreation();
+
+        // TODO: query Dynamo, only create teams if Table is empty
+//        teamCreation();
 
 
 //        ---- task & settings buttons ----

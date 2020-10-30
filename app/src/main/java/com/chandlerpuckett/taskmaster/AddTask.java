@@ -34,10 +34,7 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
     private TaskItem newTask;
     ArrayList<Team> teams = new ArrayList<>();
 
-
 //    Database database;
-
-    // save each teams into database
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +103,7 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
         }
     }
 
-    private void addTeamsToList(){
+    public void addTeamsToList(){
         Team team1 = new Team("1","team1");
         Team team2 = new Team("2","team2");
         Team team3 = new Team("3","team3");

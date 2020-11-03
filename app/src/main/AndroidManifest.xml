@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignupConfirmationActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".TaskDetail" />
         <activity android:name=".AllTasks" />

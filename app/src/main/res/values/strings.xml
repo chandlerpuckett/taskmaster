@@ -48,4 +48,8 @@
     <string name="description">Description:</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="email">email</string>
+    <string name="join_taskmaster">Join Taskmaster</string>
+    <string name="sign_up_confirmation">Sign Up Confirmation</string>
+    <string name="sign_in">Sign In</string>
 </resources>

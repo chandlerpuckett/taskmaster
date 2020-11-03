@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
         configureAws();
 
-        // TODO: query Dynamo, only create teams if Table is empty
+//      TODO: query Dynamo, only create teams if Table is empty
 //        teamCreation();
 
 
@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
                 openSettingPage();
             }
         });
+
+        findViewById(R.id.goToSignUpBtn).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) { openSignUpPage(); }
+        });
     }
 
     public void openAddTaskPage(){
@@ -127,6 +132,11 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
     public void openSettingPage(){
         Intent intent = new Intent(this,SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSignUpPage(){
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 

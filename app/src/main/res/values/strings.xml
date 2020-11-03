@@ -46,4 +46,6 @@
     <string name="groceries">Go Grocery Shopping</string>
     <string name="task_state">Task State:</string>
     <string name="description">Description:</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

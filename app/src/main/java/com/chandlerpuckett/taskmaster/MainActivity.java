@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
         configureAws();
 
-        // TODO: query Dynamo, only create teams if Table is empty
+//      TODO: query Dynamo, only create teams if Table is empty
 //        teamCreation();
 
 

@@ -19,11 +19,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
@@ -31,6 +34,9 @@ import com.amplifyframework.datastore.generated.model.Team;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.chandlerpuckett.taskmaster.models.Task;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TaskViewAdapter.OnInteractWithTaskListener {
@@ -62,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
         connectToRecyclerView(handler);
 
+        Amplify.Auth.fetchUserAttributes(
+                attributes -> Log.i("auth", "user attributes : " + attributes.toString()),
+                        error -> Log.e("auth", "failure", error)
+        );
 
 //        ------ OLD LOCAL DB RECYCLER VIEW ---------
 
@@ -87,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
 
         configureAws();
+        uploadFile();
 
 //      TODO: query Dynamo, only create teams if Table is empty
 //        teamCreation();
@@ -120,8 +131,20 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
             @Override
             public void onClick(View v) { openSignUpPage(); }
         });
+
+        findViewById(R.id.loginBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { openLoginPage(); }
+        });
+
+        findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { logout(); }
+        });
+
     }
 
+//    ----- BUTTON ROUTES -----
     public void openAddTaskPage(){
         Intent intent = new Intent(this, AddTask.class);
         startActivity(intent);
@@ -140,6 +163,35 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
     public void openSignUpPage(){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
+    }
+
+    public void openLoginPage(){
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+    }
+
+    public void logout(){
+        // TODO: move toast to helper method -> sort out Looper error
+        Toast toast = Toast.makeText(this, "Logout Successful", Toast.LENGTH_LONG);
+        toast.show();
+
+        Amplify.Auth.signOut(
+                () -> logoutHelper(),
+                error -> Log.e("Amplify.signOut", error.toString())
+        );
+    }
+
+    private void logoutHelper(){
+        // show toast
+
+
+        // wipes username
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        pref.edit().remove("username").apply();
+
+        // reloads page
+        finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void openTaskDetailPage(View view){
@@ -219,4 +271,32 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         intent.putExtra("body", task.getBody());
         startActivity(intent);
     }
+
+//  --- S3 BUCKET ---
+    private void uploadFile() {
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "MyBucketTest");
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
+            writer.append("Example file contents");
+            writer.close();
+        } catch (Exception exception) {
+            Log.e("Amplify.s3", "Upload failed", exception);
+        }
+
+        Amplify.Storage.uploadFile(
+                "MyBucketTest",
+                exampleFile,
+                result -> Log.i("Amplify.s3", "Successfully uploaded: " + result.getKey()),
+                storageFailure -> Log.e("Amplify.s3", "Upload failed", storageFailure)
+        );
+    }
+
+    public void retrieveFile(){
+        Intent getPicIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        getPicIntent.setType("*/*");
+        getPicIntent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{".png",".jpg"});
+        getPicIntent.addCategory(Intent.CATEGORY_OPENABLE);
+    }
+
 }

@@ -28,6 +28,7 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.amplifyframework.datastore.generated.model.Team;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.chandlerpuckett.taskmaster.models.Task;
 
 import java.util.ArrayList;
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         try {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
         } catch (AmplifyException e) {
             e.printStackTrace();

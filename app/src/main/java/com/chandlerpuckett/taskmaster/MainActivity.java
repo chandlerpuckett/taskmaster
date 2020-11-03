@@ -24,6 +24,7 @@ import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.amplifyframework.datastore.generated.model.Team;
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         connectToRecyclerView(handler);
 
 
-
 //        ------ OLD LOCAL DB RECYCLER VIEW ---------
 
 //        database = Room.databaseBuilder(getApplicationContext(), Database.class, "puckett_task_database")
@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         configureAws();
 
@@ -156,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
     private void configureAws(){
         try {
             Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
-
         } catch (AmplifyException e) {
             e.printStackTrace();
         }

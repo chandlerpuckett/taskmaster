@@ -59,6 +59,11 @@ This app will allow a user to create and track tasks
 - TODO: flesh out full radio button functionality
 - TODO: allow user to be added to a team
 
+### Day10 (Lab 36) - Cognito
+- Added AWS Cognito Auth
+- Username dynamically displayed on homepage
+- Added Logout functionality
+
 ### Screenshots
 #### Day7 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">

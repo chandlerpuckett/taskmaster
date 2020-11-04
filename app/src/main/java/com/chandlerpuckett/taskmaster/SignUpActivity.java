@@ -30,7 +30,8 @@ public class SignUpActivity extends AppCompatActivity {
                     AuthSignUpOptions.builder().userAttribute(AuthUserAttributeKey.email(),email).build(),
                     result -> {
                         Log.i("Amplify.signup", "Result: " + result.toString());
-                        startActivity(new Intent(SignUpActivity.this, SignupConfirmationActivity.class));
+                        startActivity(new Intent(SignUpActivity.this,
+                                SignupConfirmationActivity.class));
                     },
                     error -> Log.e("Amplify.signup", "Sign up failed", error)
             );

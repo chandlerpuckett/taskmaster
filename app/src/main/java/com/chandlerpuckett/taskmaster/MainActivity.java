@@ -68,10 +68,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
 
         connectToRecyclerView(handler);
 
-        Amplify.Auth.fetchUserAttributes(
-                attributes -> Log.i("auth", "user attributes : " + attributes.toString()),
-                        error -> Log.e("auth", "failure", error)
-        );
 
 //        ------ OLD LOCAL DB RECYCLER VIEW ---------
 
@@ -170,6 +166,20 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         startActivity(intent);
     }
 
+    public void openTaskDetailPage(View view){
+        Intent intent = new Intent(this, TaskDetail.class);
+        Button task = (Button) view;
+        String btnTxt = task.getText().toString();
+
+        System.out.println("---- TESTING TESTING ----");
+        System.out.println(btnTxt);
+
+        intent.putExtra("task",btnTxt);
+        startActivity(intent);
+    }
+
+
+//    --- Cognito Logout ---
     public void logout(){
         // TODO: move toast to helper method -> sort out Looper error
         Toast toast = Toast.makeText(this, "Logout Successful", Toast.LENGTH_LONG);
@@ -192,18 +202,6 @@ public class MainActivity extends AppCompatActivity implements TaskViewAdapter.O
         // reloads page
         finish();
         startActivity(new Intent(this, MainActivity.class));
-    }
-
-    public void openTaskDetailPage(View view){
-        Intent intent = new Intent(this, TaskDetail.class);
-        Button task = (Button) view;
-        String btnTxt = task.getText().toString();
-
-        System.out.println("---- TESTING TESTING ----");
-        System.out.println(btnTxt);
-
-        intent.putExtra("task",btnTxt);
-        startActivity(intent);
     }
 
 //    ----- AWS Helper Methods ------

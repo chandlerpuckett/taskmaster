@@ -1,4 +1,36 @@
 {
     "Version": 5,
-    "ElasticsearchWarning": true
+    "ElasticsearchWarning": true,
+    "StackMapping": {
+        "TaskItemfoundAtResolver": "ConnectionStack",
+        "TeamtaskItemsResolver": "ConnectionStack",
+        "TaskItemTable": "TaskItem",
+        "TaskItemIAMRole": "TaskItem",
+        "TaskItemDataSource": "TaskItem",
+        "GetTaskItemResolver": "TaskItem",
+        "ListTaskItemResolver": "TaskItem",
+        "CreateTaskItemResolver": "TaskItem",
+        "UpdateTaskItemResolver": "TaskItem",
+        "DeleteTaskItemResolver": "TaskItem",
+        "GetAttTaskItemTableStreamArn": "TaskItem",
+        "GetAttTaskItemDataSourceName": "TaskItem",
+        "GetAttTaskItemTableName": "TaskItem",
+        "TeamTable": "Team",
+        "TeamIAMRole": "Team",
+        "TeamDataSource": "Team",
+        "GetTeamResolver": "Team",
+        "ListTeamResolver": "Team",
+        "CreateTeamResolver": "Team",
+        "UpdateTeamResolver": "Team",
+        "DeleteTeamResolver": "Team",
+        "GetAttTeamTableStreamArn": "Team",
+        "GetAttTeamDataSourceName": "Team",
+        "GetAttTeamTableName": "Team"
+    },
+    "ResolverConfig": {
+        "project": {
+            "ConflictHandler": "AUTOMERGE",
+            "ConflictDetection": "VERSION"
+        }
+    }
 }

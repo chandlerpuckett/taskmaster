@@ -1,6 +1,7 @@
 package com.amplifyframework.datastore.generated.model;
 
 import com.amplifyframework.core.model.annotations.BelongsTo;
+import com.amplifyframework.core.model.annotations.HasOne;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +31,7 @@ public final class TaskItem implements Model {
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String state;
   private final @ModelField(targetType="Team") @BelongsTo(targetName = "taskItemFoundAtId", type = Team.class) Team foundAt;
+  private final @ModelField(targetType="NewFile") @HasOne(associatedWith = "belongsTo", type = NewFile.class) NewFile file = null;
   public String getId() {
       return id;
   }
@@ -50,7 +52,11 @@ public final class TaskItem implements Model {
       return foundAt;
   }
   
-  private TaskItem(String id, String title, String body, String state, Team foundAt) {
+  public NewFile getFile() {
+      return file;
+  }
+  
+  public TaskItem(String id, String title, String body, String state, Team foundAt) {
     this.id = id;
     this.title = title;
     this.body = body;

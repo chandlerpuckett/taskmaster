@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.chandlerpuckett.taskmaster"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.amplifyframework:aws-storage-s3:1.4.1'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation group: 'commons-io', name: 'commons-io', version: '2.4'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'com.google.android.material:material:1.2.1'

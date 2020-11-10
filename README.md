@@ -75,6 +75,13 @@ This app will allow a user to create and track tasks
 - Added Amazon SNS notifications
 
 ### Screenshots
+
+### Lab38 - SNS Screenshots
+<img src="screenshots/lab38-1.png" alt="sns1" width="300">
+<img src="screenshots/lab38-2.png" alt="sns2" width="300">
+<img src="screenshots/lab38-3.png" alt="sns3" width="300">
+<img src="screenshots/lab38-4.png" alt="sns4" width="300">
+
 #### Day12 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">

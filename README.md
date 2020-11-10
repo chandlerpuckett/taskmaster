@@ -64,8 +64,15 @@ This app will allow a user to create and track tasks
 - Username dynamically displayed on homepage
 - Added Logout functionality
 
+### Day11 (Lab 37) - S3
+- Added S3 Buckets
+- Uses Android Picker for file select
+- Updated AWS Model for NewFile
+- TODO: Display File on TaskDetail Page
+
+
 ### Screenshots
-#### Day7 Build
+#### Day11 Build
 <img src="screenshots/main-page3.png" alt="home" width="300">
 <img src="screenshots/username.png" alt="username" width="300">
 <img src="screenshots/task-detail2.png" alt="detail" width="300">

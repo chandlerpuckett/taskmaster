@@ -21,10 +21,12 @@ import com.amplifyframework.datastore.generated.model.TaskItem;
 import com.amplifyframework.datastore.generated.model.Team;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
@@ -108,21 +110,14 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
             File fileCopy = new File(getFilesDir(), "pic");
 
             try {
-                fileCopy.createNewFile();
                 InputStream inStream = getContentResolver().openInputStream(data.getData());
-                FileUtils.copy(inStream, new FileOutputStream(fileCopy));
 
             } catch (FileNotFoundException e) {
-
                 e.printStackTrace();
                 Log.e("Amplify pic --- ", e.toString());
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
             uploadFile(fileCopy, fileCopy.getName() + Math.random());
-
+            Log.i("Amplify pic ---", "----- Picture Uploaded ! -----");
         } else {
             Log.i("Amplify pick --- ", "--- FAILURE ---");
         }
@@ -172,6 +167,24 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
         teams.add(team1);
         teams.add(team2);
         teams.add(team3);
+    }
+
+    public static void copy (File src, File dst) throws IOException {
+        InputStream in = new FileInputStream(src);
+        try {
+            OutputStream out = new FileOutputStream(dst);
+            try {
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0){
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
+        }
     }
 
     @Override

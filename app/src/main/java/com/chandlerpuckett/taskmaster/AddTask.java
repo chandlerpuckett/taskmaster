@@ -1,11 +1,9 @@
 package com.chandlerpuckett.taskmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
+import android.os.FileUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,17 +12,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskItem;
-
 import com.amplifyframework.datastore.generated.model.Team;
-import com.chandlerpuckett.taskmaster.models.Task;
-import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
@@ -33,6 +35,7 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
     private Button addTaskBtn;
     private TaskItem newTask;
     ArrayList<Team> teams = new ArrayList<>();
+    String lastFileUploadedKey;
 
 //    Database database;
 
@@ -40,8 +43,6 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
-
-        configureAws();
         addTeamsToList();
 
         System.out.println(teams.toString());
@@ -52,8 +53,8 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
 //                .build();
 
         addTaskBtn = (Button) findViewById(R.id.btn_addTask);
-        addTaskBtn.setOnClickListener(new View.OnClickListener() {
 
+        addTaskBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -91,16 +92,71 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
             }
         });
 
+        findViewById(R.id.addFileBtn).setOnClickListener(view -> {
+            retrieveFile();
+        });
+
     }
 
-    private void configureAws(){
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(getApplicationContext());
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    @Override
+    protected void onActivityResult (int req, int res, Intent data) {
+        super.onActivityResult(req, res, data);
 
-        } catch (AmplifyException e) {
-            e.printStackTrace();
+        if (req == 400){
+            Log.i("Amplify pick --- ", "got image back");
+            System.out.println(data);
+
+            File fileCopy = new File(getFilesDir(), "pic");
+
+            try {
+                InputStream inStream = getContentResolver().openInputStream(data.getData());
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.e("Amplify pic --- ", e.toString());
+            }
+            uploadFile(fileCopy, fileCopy.getName() + Math.random());
+            Log.i("Amplify pic ---", "----- Picture Uploaded ! -----");
+        } else {
+            Log.i("Amplify pick --- ", "--- FAILURE ---");
         }
+    }
+
+    private void retrieveFile(){
+        Intent getPic = new Intent(Intent.ACTION_GET_CONTENT);
+        getPic.setType("*/*");
+
+//        getPic.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{".png", ".jpg"});
+
+        getPic.addCategory(Intent.CATEGORY_OPENABLE);
+        getPic.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+
+
+        startActivityForResult(getPic,400);
+    }
+
+    private void downloadFile(String fileKey){
+        Amplify.Storage.downloadFile(
+                fileKey,
+                new File(getApplicationContext().getFilesDir() + "/" + fileKey + ".txt"),
+                result -> Log.i("Taskmaster", "Successfully Downloaded " + result.getFile().getName()),
+                error -> Log.e("Taskmaster", "download fail", error)
+        );
+    }
+
+    private void uploadFile(File file, String key) {
+        lastFileUploadedKey = key;
+
+        Amplify.Storage.uploadFile(
+                key,
+                file,
+                result -> {
+                    Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
+                    downloadFile(key);
+                },
+                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+        );
     }
 
     public void addTeamsToList(){
@@ -111,6 +167,24 @@ public class AddTask extends AppCompatActivity implements TaskViewAdapter.OnInte
         teams.add(team1);
         teams.add(team2);
         teams.add(team3);
+    }
+
+    public static void copy (File src, File dst) throws IOException {
+        InputStream in = new FileInputStream(src);
+        try {
+            OutputStream out = new FileOutputStream(dst);
+            try {
+                byte[] buf = new byte[1024];
+                int len;
+                while ((len = in.read(buf)) > 0){
+                    out.write(buf, 0, len);
+                }
+            } finally {
+                out.close();
+            }
+        } finally {
+            in.close();
+        }
     }
 
     @Override

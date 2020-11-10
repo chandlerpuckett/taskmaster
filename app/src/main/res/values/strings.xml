@@ -52,4 +52,6 @@
     <string name="join_taskmaster">Join Taskmaster</string>
     <string name="sign_up_confirmation">Sign Up Confirmation</string>
     <string name="sign_in">Sign In</string>
+    <string name="add_file">add File</string>
+    <string name="_0">0</string>
 </resources>
